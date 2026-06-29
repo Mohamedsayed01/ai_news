@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="max-w-6xl mx-auto px-6 py-20">
+
+    <!-- Hero -->
+    <div class="text-center mb-20 fade-in">
+        <div class="inline-block bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 text-sm font-semibold px-4 py-1.5 rounded-full mb-6 tracking-wide uppercase">
+            AI-Powered News
+        </div>
+        <h1 class="text-6xl font-extrabold tracking-tight text-gray-900 dark:text-white mb-5 leading-tight">
+            The world's news.<br>
+            <span class="text-blue-600">Instantly summarized.</span>
+        </h1>
+        <p class="text-xl text-gray-500 dark:text-gray-400 max-w-xl mx-auto">
+            Real-time headlines from the most trusted sources, distilled by AI into clear, professional briefings.
+        </p>
+    </div>
+
+    <!-- Category Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {% set descs = {
+            'World': 'Global affairs, international conflicts, diplomacy, and geopolitics.',
+            'Business': 'Markets, economy, companies, and financial news.',
+            'Technology': 'AI, startups, gadgets, and the digital world.',
+            'Sports': 'Football, basketball, and all major sporting events.',
+            'Politics': 'Elections, policy, government, and political analysis.',
+            'Science': 'Discoveries, research, space, and health breakthroughs.'
+        } %}
+        {% set icons = {
+            'World': '🌍', 'Business': '💼', 'Technology': '💻',
+            'Sports': '⚽', 'Politics': '🏛️', 'Science': '🧪'
+        } %}
+        {% for cat in categories %}
+        <a href="/category/{{ cat }}"
+           class="group bg-white dark:bg-slate-800 border border-gray-100 dark:border-slate-700 hover:border-blue-500 dark:hover:border-blue-500 rounded-3xl p-8 card-hover fade-in block"
+           style="animation-delay: {{ loop.index * 0.08 }}s">
+            <div class="text-5xl mb-5 group-hover:scale-110 transition-transform inline-block">
+                {{ icons.get(cat, '📰') }}
+            </div>
+            <h2 class="text-2xl font-bold mb-2 text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition">
+                {{ cat }}
+            </h2>
+            <p class="text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
+                {{ descs.get(cat, 'Latest headlines with AI summaries.') }}
+            </p>
+            <div class="mt-6 text-blue-600 dark:text-blue-400 text-sm font-semibold flex items-center gap-1 group-hover:gap-2 transition-all">
+                Read Now <span>→</span>
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+
+</div>
+{% endblock %}
