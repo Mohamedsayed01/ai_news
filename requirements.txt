@@ -1,0 +1,7 @@
+Flask==3.0.3
+requests
+feedparser
+beautifulsoup4
+lxml
+python-dotenv
+google-generativeai
