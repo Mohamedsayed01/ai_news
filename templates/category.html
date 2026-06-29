@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% block content %}
+{% set icons = {
+    'World': '🌍', 'Business': '💼', 'Technology': '💻',
+    'Sports': '⚽', 'Politics': '🏛️', 'Science': '🧪'
+} %}
+<div class="max-w-6xl mx-auto px-6 py-12">
+
+    <!-- Header -->
+    <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10 pb-8 border-b border-gray-200 dark:border-slate-700">
+        <div>
+            <span class="text-5xl block mb-3">{{ icons.get(category, '📰') }}</span>
+            <h1 class="text-4xl font-extrabold text-gray-900 dark:text-white">{{ category }} News</h1>
+            {% if search_query %}
+            <p class="mt-2 text-blue-600 dark:text-blue-400 font-medium text-sm">
+                Showing results for: "{{ search_query }}"
+            </p>
+            {% endif %}
+        </div>
+        <a href="/" class="text-sm text-blue-600 dark:text-blue-400 hover:underline flex items-center gap-1 shrink-0">
+            ← Back to Home
+        </a>
+    </div>
+
+    {% if articles %}
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {% for article in articles %}
+        <div class="bg-white dark:bg-slate-800 border border-gray-100 dark:border-slate-700 rounded-3xl overflow-hidden card-hover flex flex-col">
+            <div class="p-7 flex-1 flex flex-col">
+                <h3 class="font-bold text-[17px] leading-snug mb-3 text-gray-900 dark:text-white line-clamp-3">
+                    {{ article.raw_title }}
+                </h3>
+                <p class="text-gray-500 dark:text-gray-400 text-sm leading-relaxed line-clamp-4 flex-1">
+                    {{ article.description }}
+                </p>
+                <div class="flex gap-2 mt-6">
+                    <button
+                        onclick="openSummary(this)"
+                        data-title="{{ article.title }}"
+                        data-url="{{ article.link }}"
+                        data-desc="{{ article.description }}"
+                        class="flex-1 bg-blue-600 hover:bg-blue-700 text-white text-sm py-3 rounded-2xl font-semibold transition">
+                        ✨ AI Summary
+                    </button>
+                    <button
+                        onclick="saveArticle(this)"
+                        data-title="{{ article.title }}"
+                        data-url="{{ article.link }}"
+                        data-desc="{{ article.description }}"
+                        data-cat="{{ category }}"
+                        class="px-4 border border-gray-200 dark:border-slate-600 hover:bg-gray-50 dark:hover:bg-slate-700 rounded-2xl transition text-base"
+                        title="Save">🔖
+                    </button>
+                    <a href="{{ article.link }}" target="_blank" rel="noopener"
+                       class="flex-1 border border-gray-200 dark:border-slate-600 hover:bg-gray-50 dark:hover:bg-slate-700 text-sm py-3 rounded-2xl text-center font-semibold transition dark:text-white">
+                        Read Full
+                    </a>
+                </div>
+            </div>
+            <div class="px-7 py-3 bg-gray-50 dark:bg-slate-900/60 text-xs text-gray-400 border-t border-gray-100 dark:border-slate-700">
+                {{ article.published }}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    {% else %}
+    <div class="text-center py-32">
+        <div class="text-6xl mb-5">📭</div>
+        <p class="text-xl font-semibold text-gray-600 dark:text-gray-400">No articles found</p>
+        <p class="text-gray-400 text-sm mt-2">Try refreshing or check back later.</p>
+    </div>
+    {% endif %}
+
+</div>
+{% endblock %}
