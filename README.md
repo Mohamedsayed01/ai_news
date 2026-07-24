@@ -32,13 +32,13 @@ in — turning a page full of headlines into something you can actually act on.
 ## 🖼️ Screenshots
 
 <p align="center">
-  <img src=""home.png"" alt="SnapNews home" width="800"/>
-  <br><i>home.png</i>
+  <img src="home.png" alt="SnapNews home" width="800"/>
+  <br><i>Home page</i>
 </p>
 
 <p align="center">
-  <img src=""Summarize.png"" alt="SnapNews Summarize" width="800"/>
-  <br><i>Summarize Page</i>
+  <img src="Summarize.png" alt="SnapNews Summarize" width="800"/>
+  <br><i>Summarize page</i>
 </p>
 
 ---
